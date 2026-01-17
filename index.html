@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e1e2e">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dream-Link 4th GRADE RESULT 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div id="featureModalOverlay" class="modal-overlay">
+        <div class="feature-modal">
+            <div class="fm-header">
+                <div class="fm-title">🚀 Features Guide
+                </div>
+                <button class="fm-close" onclick="toggleInfoModal(false)">&times;</button>
+            </div>
+            <div class="fm-body">
+                <p>स्वागत है! <b>Dream-Link Results</b> में आप यह सब कर सकते हैं:</p>
+                <ul>
+                    <li>📊 <b>Rank Analyze:</b> किसी भी रैंक रेंज (जैसे 1-100) के बीच Category और Gender का पूरा डेटा चेक करें।</li>
+                    <li>🏆 <b>Cutoff View:</b> होम स्क्रीन पर सभी कैटेगरी की ऑफिशियल कटऑफ देखें।</li>
+                    <li>🔍 <b>Search Result:</b> अपना Roll Number डालकर मार्कशीट, रैंक और शिफ्ट का डेटा देखें।</li>
+                    <li>⚡ <b>Deep Analysis:</b> रिजल्ट आने के बाद "Inner Toolbar" से आगे-पीछे की रैंक तुरंत देखें।</li>
+                    <li>👍 <b>Result Loading:</b> रिजल्ट डेटा बड़ा होने के कारण लोडिंग में थोड़ा समय लग सकता है, कृपया धैर्य रखें।</li>
+                    <li>🖨️ <b>Print Mode:</b> साफ-सुथरा प्रिंट निकालने के लिए Print बटन का यूज़ करें।</li>
+                    <li>📲 <b>Install App:</b> Chrome ब्राउज़र के मेनू (3-dots) से <b>"Install App"</b> या <b>"Add to Home Screen"</b> करें। इससे बार-बार लिंक की ज़रूरत नहीं पड़ेगी।</li>
+                </ul>
+                <button class="fm-btn-ok" onclick="toggleInfoModal(false)">Got it, Let's Check!</button>
+            </div>
+        </div>
+    </div>
+    <div id="global-loader" class="loader-overlay">
+        <div class="loader-spinner"></div>
+        <div id="loader-msg" class="loader-text">Processing...</div>
+        <div id="loader-sub" class="loader-subtext">Please wait</div>
+    </div>
+
+    <header>
+        <h1>4th Grade Result</h1>
+        <div class="sub-head">RANK Analysis</div>
+        <button class="info-icon-btn" onclick="toggleInfoModal(true)" title="Help & Features">!</button>
+    </header>
+
+    <div class="container">
+
+        <div id="print-header" style="display: none;">
+            <h3>Dream-Link Results</h3>
+            <p style="font-size: 0.9rem;">Analysis by MP SALODIYA</p>
+        </div>
+
+        <div class="mode-toggle">
+            <button class="toggle-btn active" onclick="switchMode('analyze')">📊 Rank Analyse</button>
+            <button class="toggle-btn" onclick="switchMode('search')">🔍 Search Result</button>
+        </div>
+        <div id="input-search" class="input-section">
+            <div class="search-inputs">
+                <div class="form-group" style="flex: 0.6;">
+                    <select id="examTypeSearch">
+                        <option value="NTSP">NTSP</option>
+                        <option value="TSP">TSP</option>
+                    </select>
+                </div>
+                <div class="form-group" style="flex: 1.4;">
+                    <input type="number" id="rollInput" placeholder="Enter Roll Number">
+                </div>
+            </div>
+            <button class="main-btn" onclick="executeSearch()">Check Result</button>
+        </div>
+
+
+        <div id="input-analyze" class="input-section active">
+
+            <div class="search-inputs">
+
+                <div class="form-group" style="flex: 0.6;">
+                    <select id="examTypeAnalyze">
+                        <option value="NTSP">NTSP</option>
+                        <option value="TSP">TSP</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="flex: 1.4; display: flex; gap: 5px;">
+                    <input type="number" id="ana_start" placeholder="Start" style="width: 50%; padding: 8px;">
+                    <input type="number" id="ana_end" placeholder="End" style="width: 50%; padding: 8px;">
+                </div>
+            </div>
+            <button class="main-btn analyze-btn" onclick="executeAnalyze()">Analyze Stats 🚀</button>
+        </div>
+        <div id="cutoff-display-area">
+            <div class="cutoff-header">
+                <span id="cutoff-title">🏆 NTSP OFFICIAL CUTOFF (PRE DV)</span>
+            </div>
+            <div class="cutoff-table-wrapper">
+                <table class="cutoff-table" id="cutoff-table-body">
+                </table>
+            </div>
+            <div id="hz-cutoff-row" class="hz-row"></div>
+        </div>
+
+        <div id="status-msg" style="text-align: center; margin-top: 10px; font-weight: 600; font-size: 0.8rem; min-height: 18px;"></div>
+
+        <div id="result-search" class="result-container">
+            <div class="res-card">
+                <div class="res-header">CANDIDATE SCORE CARD</div>
+                <div class="compact-grid">
+                    <div class="c-row">
+                        <div class="c-label">Roll No</div>
+                        <div class="c-val" id="d_roll">-</div>
+                    </div>
+                    <div class="c-row">
+                        <div class="c-label">Category</div>
+                        <div class="c-val" id="d_cat">-</div>
+                    </div>
+                    <div class="c-row" style="grid-column: span 2;">
+                        <div class="c-label">Name</div>
+                        <div class="c-val" id="d_name">-</div>
+                    </div>
+                    <div class="c-row" style="grid-column: span 2;">
+                        <div class="c-label">Father</div>
+                        <div class="c-val" id="d_father">-</div>
+                    </div>
+                    <div class="c-row" style="grid-column: span 2;">
+                        <div class="c-label">Mother</div>
+                        <div class="c-val" id="d_mother">-</div>
+                    </div>
+                    <div class="c-row">
+                        <div class="c-label">Gender</div>
+                        <div class="c-val" id="d_gender">-</div>
+                    </div>
+                    <div class="c-row">
+                        <div class="c-label">Special Cat</div>
+                        <div class="c-val" id="d_subcat">-</div>
+                    </div>
+                    <div class="c-row">
+                        <div class="c-label">TSP Status</div>
+                        <div class="c-val" id="d_tsp">-</div>
+                    </div>
+                    <div class="c-row">
+                        <div class="c-label">Shift</div>
+                        <div class="c-val" id="d_shift">-</div>
+                    </div>
+                    <div class="c-row" style="background: #f8f9fa;">
+                        <div class="c-label">Exam Date</div>
+                        <div class="c-val" id="d_exam_date">-</div>
+                    </div>
+                    <div class="c-row" style="background: #f8f9fa;">
+                        <div class="c-label">Total Cand.</div>
+                        <div class="c-val" id="d_total_cands">-</div>
+                    </div>
+                    <div class="c-row" style="background: #fdf2f2;">
+                        <div class="c-label">Present</div>
+                        <div class="c-val" id="d_present">-</div>
+                    </div>
+                    <div class="c-row" style="background: #fdf2f2;">
+                        <div class="c-label">Absent</div>
+                        <div class="c-val" id="d_absent">-</div>
+                    </div>
+                    <div class="c-row">
+                        <div class="c-label">Raw Marks</div>
+                        <div class="c-val" id="d_raw">-</div>
+                    </div>
+                    <div class="c-row">
+                        <div class="c-label">Right Que</div>
+                        <div class="c-val" id="d_rightq" style="color: green;">-</div>
+                    </div>
+
+                    <div class="c-row" style="background:#f0f8ff;">
+                        <div class="c-label">Final Marks</div>
+                        <div class="c-val c-highlight" id="d_final">-</div>
+                    </div>
+                    <div class="c-row" style="background:#f0f8ff;">
+                        <div class="c-label">Diff.</div>
+                        <div class="c-val" id="d_diff" style="font-weight:bold;">-</div>
+                    </div>
+
+                    <div class="c-row" style="grid-column: span 2; background: #fffbe6; justify-content: center; gap: 8px; border-top: 1px solid #e0e0e0; padding: 8px;">
+                        <span class="c-label" style="font-size: 0.8rem; width: auto;">OVERALL MERIT RANK:</span>
+                        <span class="c-val c-highlight" style="font-size: 1.1rem; max-width: none; flex: initial;" id="d_merit">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inner-toolbar">
+                <span>Rank:</span>
+                <input type="number" id="res_start" class="mini-inp" placeholder="Start">
+                <span>-</span>
+                <input type="number" id="res_end" class="mini-inp" placeholder="End">
+                <button class="mini-btn" onclick="updateSearchResult()">Go</button>
+                <button class="refresh-icon-btn" onclick="resetSearchAnalysis()">↻</button>
+            </div>
+
+            <div class="sec-title" style="margin-top: 0;">📊 Deep Merit Analysis</div>
+            <div class="rank-table-wrapper" id="rt-wrapper-1">
+                <table class="rank-table">
+                    <thead>
+                        <tr>
+                            <th>Criteria</th>
+                            <th>Rank (With TSP)</th>
+                            <th>Rank (NTSP Only)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tb-overall-rank"></tbody>
+                </table>
+            </div>
+
+            <div class="sec-title"><span id="lbl-ov-stats">🌐 Overall Stats</span></div>
+            <div class="table-wrapper" id="rt-wrapper-2">
+                <table class="stats-table" id="tb-overall-stats"></table>
+            </div>
+
+            <div id="search-shift-section">
+                <div class="sec-title shift-color"><span id="lbl-sh-stats">⚡ Shift Statistics</span></div>
+                <div class="rank-table-wrapper" id="rt-wrapper-3">
+                    <table class="rank-table shift-rank-table">
+                        <thead>
+                            <tr>
+                                <th>Criteria</th>
+                                <th>Shift Rank (All)</th>
+                                <th>Shift Rank (NTSP)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tb-shift-rank"></tbody>
+                    </table>
+                </div>
+                <div class="table-wrapper" id="rt-wrapper-4">
+                    <table class="stats-table" id="tb-shift-stats"></table>
+                </div>
+            </div>
+
+            <button class="print-btn" onclick="window.print()">🖨️ Print Result</button>
+        </div>
+
+        <div id="result-analyze" class="result-container">
+            <div class="sec-title" style="margin-top: 0;"><span id="ana-ov-header">🌐 Overall Stats Range Analysis</span></div>
+            <div id="ana-overall-container"></div>
+
+            <div class="sec-title shift-color">⚡ Multi-Shift Analysis</div>
+            <div id="ana-shifts-container"></div>
+
+            <button class="print-btn" onclick="window.print()">🖨️ Print Stats</button>
+        </div>
+
+        <div class="home-action-area">
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-num" id="count-ntsp-merit"></div>
+                    <div class="stat-label">NTSP Rank Data</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num" id="count-ntsp-roll"></div>
+                    <div class="stat-label">NTSP Result Data</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num" id="count-tsp-merit"></div>
+                    <div class="stat-label">TSP Rank Data</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num" id="count-tsp-roll"></div>
+                    <div class="stat-label">TSP Result Data</div>
+                </div>
+            </div>
+            <a href="https://t.me/YOUR_LINK_HERE" class="telegram-btn" target="_blank">Join Telegram</a>
+        </div>
+
+    </div>
+
+    <footer>&copy; 2026 Dream-Link MP SALODIYA</footer>
+
+    <script src="cutoff_data.js"></script>
+
+
+    <script>
+      
+      const ROLL_FILES_NTSP = [];
+
+        const MERIT_FILES_NTSP = [
+            "data_ntsp_merit_part1.js",
+            "data_ntsp_merit_part2.js",
+            "data_ntsp_merit_part3.js",
+            "data_ntsp_merit_part4.js",
+            "data_ntsp_merit_part5.js"
+        ];
+
+        const ROLL_FILES_TSP = [];
+        const MERIT_FILES_TSP = [];
+        
+        const LOADED_FILES = new Set();
+      
+        function toggleInfoModal(show) {
+            const el = document.getElementById('featureModalOverlay');
+            if (show) {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+
+                localStorage.setItem('hasSeenFeatures_v1', 'true');
+            }
+        }
+
+
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            if (!obj) return;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerHTML = end.toLocaleString();
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    observer.unobserve(entry.target);
+                    animateValue("count-ntsp-merit", 0, (MERIT_FILES_NTSP.length * 100000), 2000);
+                    animateValue("count-ntsp-roll", 0, (ROLL_FILES_NTSP.length * 100000), 2000);
+                    animateValue("count-tsp-merit", 0, (MERIT_FILES_TSP.length * 100000), 2000);
+                    animateValue("count-tsp-roll", 0, (ROLL_FILES_TSP.length * 100000), 2000);
+                }
+            });
+        }, observerOptions);
+
+        window.addEventListener('load', () => {
+            const target = document.querySelector('.stats-grid');
+            if (target) observer.observe(target);
+        });
+        
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                if (LOADED_FILES.has(src)) {
+                    resolve(true);
+                    return;
+                }
+
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = () => {
+                    LOADED_FILES.add(src);
+                    resolve(true);
+                };
+                script.onerror = () => {
+                    console.error("Error loading:", src);
+                    resolve(false);
+                };
+                document.body.appendChild(script);
+            });
+        }
+
+        function showLoading(msg, subMsg = "Loading data files...") {
+            document.getElementById('loader-msg').innerText = msg;
+            document.getElementById('loader-sub').innerText = subMsg;
+            document.getElementById('global-loader').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('global-loader').style.display = 'none';
+        }
+
+        function checkRollInMemory(roll, type) {
+            const db = (type === "TSP") ? window.TSP_ROLL_DATA : window.NTSP_ROLL_DATA;
+            return db && db[roll];
+        }
+
+        function checkMeritInMemory(rank, type) {
+            const db = (type === "TSP") ? window.TSP_MERIT_DATA : window.NTSP_MERIT_DATA;
+            return db && db[rank];
+        }
+
+        const CAT_ORDER = ["GEN", "OBC", "EWS", "MBC", "SC", "ST", "SAH"];
+
+        const SUB_TYPES = [{
+                key: "DIV",
+                label: "Divorcee"
+            },
+            {
+                key: "EXM",
+                label: "Ex-Serviceman"
+            },
+            {
+                key: "EXM SP",
+                label: "Ex-S + Sports"
+            }, // Combined
+            {
+                key: "LDCP",
+                label: "LDCP/PH"
+            },
+            {
+                key: "LDCP DIV",
+                label: "LDCP + Div"
+            },
+            {
+                key: "LDCP EXM",
+                label: "LDCP + Ex-S"
+            },
+            {
+                key: "LDCP SP",
+                label: "LDCP + Sports"
+            },
+            {
+                key: "SP",
+                label: "Sports Person"
+            },
+            {
+                key: "SP DIV",
+                label: "Sport + Div"
+            },
+            {
+                key: "WID",
+                label: "Widow"
+            }
+        ];
+
+        let CURRENT_DB = {};
+        let CANDIDATE = null;
+        let CURRENT_TYPE = "NTSP";
+
+        function switchMode(mode) {
+            document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.input-section').forEach(d => d.classList.remove('active'));
+            document.querySelectorAll('.result-container').forEach(d => d.style.display = 'none');
+            document.getElementById('status-msg').innerHTML = "";
+
+            if (mode === 'search') {
+                document.querySelectorAll('.toggle-btn')[1].classList.add('active');
+                document.getElementById('input-search').classList.add('active');
+            } else {
+                document.querySelectorAll('.toggle-btn')[0].classList.add('active');
+                document.getElementById('input-analyze').classList.add('active');
+            }
+        }
+
+        function loadDB(type) {
+            CURRENT_TYPE = type;
+            if (type === "TSP") {
+                CURRENT_DB = window.TSP_MERIT_DATA || {};
+                return window.TSP_ROLL_DATA || {};
+            } else {
+                CURRENT_DB = window.NTSP_MERIT_DATA || {};
+                return window.NTSP_ROLL_DATA || {};
+            }
+        }
+
+        function renderCutoff(type) {
+            const display = document.getElementById('cutoff-display-area');
+            const tbody = document.getElementById('cutoff-table-body');
+            const title = document.getElementById('cutoff-title');
+            const hzRow = document.getElementById('hz-cutoff-row');
+
+            title.innerText = `🏆 ${type} OFFICIAL CUTOFF (PRE DV)`;
+
+            const mainData = (CUTOFF_DB && CUTOFF_DB[type]) ? CUTOFF_DB[type] : {};
+            const hzData = (HORIZONTAL_CUTOFF && HORIZONTAL_CUTOFF[type]) ? HORIZONTAL_CUTOFF[type] : [];
+
+            const fmt = (obj) => {
+                if (!obj || !obj.cut) return '-';
+                return `<span>${obj.cut}</span>`;
+            };
+            let html = `<thead>
+                <tr>
+                    <th>Cat</th>
+                    <th>GEN</th>
+                    <th>FEM</th>
+                    <th>WID</th>
+                    <th>DIV</th>
+                    <th>EX</th>
+                </tr>
+            </thead><tbody>`;
+
+            for (const [cat, vals] of Object.entries(mainData)) {
+                html += `<tr>
+                    <td>${cat}</td>
+                    <td>${fmt(vals.GEN)}</td>
+                    <td>${fmt(vals.FEM)}</td>
+                    <td>${fmt(vals.WID)}</td>
+                    <td>${fmt(vals.DIV)}</td>
+                    <td>${fmt(vals.EX)}</td>
+                </tr>`;
+            }
+            html += `</tbody>`;
+            tbody.innerHTML = html;
+            hzRow.innerHTML = hzData.map(d => {
+                const valDisp = d.cut === "NA" ? "NA" : d.cut;
+                return `<div class="hz-tag" style="text-align:center;">
+                <span style="display:block;">${d.label}: ${valDisp}</span>
+            </div>`;
+            }).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCutoff('NTSP');
+
+            const searchSelect = document.getElementById('examTypeSearch');
+            if (searchSelect) {
+                searchSelect.addEventListener('change', (e) => {
+                    renderCutoff(e.target.value);
+                    const anaSelect = document.getElementById('examTypeAnalyze');
+                    if (anaSelect) anaSelect.value = e.target.value;
+                });
+            }
+
+            const analyzeSelect = document.getElementById('examTypeAnalyze');
+            if (analyzeSelect) {
+                analyzeSelect.addEventListener('change', (e) => {
+                    renderCutoff(e.target.value);
+                    const srchSelect = document.getElementById('examTypeSearch');
+                    if (srchSelect) srchSelect.value = e.target.value;
+                });
+            }
+        });
+
+        async function executeSearch() {
+            const roll = document.getElementById('rollInput').value.trim();
+            const type = document.getElementById('examTypeSearch').value;
+            const status = document.getElementById('status-msg');
+
+            document.getElementById('result-search').style.display = 'none';
+            document.getElementById('cutoff-display-area').style.display = 'none';
+            status.innerText = "";
+
+            if (!roll) {
+                status.innerText = "Please enter Roll Number";
+                status.style.color = "red";
+                return;
+            }
+
+            showLoading("Searching Database...", "Scanning records for Roll: " + roll);
+
+            const rollFileList = (type === "TSP") ? ROLL_FILES_TSP : ROLL_FILES_NTSP;
+            const meritFileList = (type === "TSP") ? MERIT_FILES_TSP : MERIT_FILES_NTSP;
+
+            let foundData = null;
+
+            for (const file of rollFileList) {
+                
+                foundData = checkRollInMemory(roll, type);
+                if (foundData) {
+                    break; 
+                }
+
+                if (!LOADED_FILES.has(file)) {
+                    showLoading("Scanning Database...", `Loading file: ${file}`);
+                 
+                    await loadScript(file);
+
+                    foundData = checkRollInMemory(roll, type);
+                    
+                    if (foundData) {
+                        break; 
+                    }
+                }
+            }
+
+            if (!foundData) {
+                hideLoading();
+                status.innerText = "Roll Number Not Found!";
+                status.style.color = "red";
+                return;
+            }
+
+            const meritRank = parseInt(foundData.Merit);
+            showLoading("Roll Found!", `Retrieving Rank Data (${meritRank})...`);
+
+            for (const mFile of meritFileList) {
+                if (checkMeritInMemory(meritRank, type)) break;
+
+                if (!LOADED_FILES.has(mFile)) {
+                    await loadScript(mFile);
+                    if (checkMeritInMemory(meritRank, type)) break;
+                }
+            }
+
+            setTimeout(() => {
+                loadDB(type);
+
+                CANDIDATE = {
+                    ...foundData,
+                    Merit: meritRank
+                };
+
+                const det = CURRENT_DB[CANDIDATE.Merit] || {};
+                CANDIDATE.Cat = (det.Category || "OTHER").toUpperCase();
+                CANDIDATE.Gen = (det.Gender || "OTHER").toUpperCase();
+                CANDIDATE.Shift = String(det.Shift);
+                CANDIDATE.SubRaw = (det.SubCat || "").toUpperCase();
+                CANDIDATE.Tsp = (det.TSP || "").toUpperCase().includes("YES") || (det.TSP || "").toUpperCase().includes("TSP");
+
+                document.getElementById('d_roll').innerText = roll;
+                document.getElementById('d_name').innerText = CANDIDATE.Name;
+                document.getElementById('d_father').innerText = CANDIDATE.Father;
+                document.getElementById('d_mother').innerText = CANDIDATE.Mother;
+                document.getElementById('d_raw').innerText = CANDIDATE.RawMark;
+                document.getElementById('d_final').innerText = CANDIDATE.FinalMark;
+                document.getElementById('d_merit').innerText = CANDIDATE.Merit;
+                document.getElementById('d_cat').innerText = CANDIDATE.Cat;
+                document.getElementById('d_gender').innerText = CANDIDATE.Gen;
+                document.getElementById('d_shift').innerText = "Shift " + CANDIDATE.Shift;
+                document.getElementById('d_tsp').innerText = CANDIDATE.Tsp ? "YES" : "NO";
+
+                const sData = SHIFT_ATTENDANCE[CANDIDATE.Shift] || {
+                    date: "N/A",
+                    total: "-",
+                    pres: "-",
+                    abs: "-",
+                    per: "-"
+                };
+                document.getElementById('d_exam_date').innerText = sData.date;
+                document.getElementById('d_total_cands').innerText = sData.total;
+                document.getElementById('d_present').innerHTML = `${sData.pres} <span style="font-size:0.65rem; color:#28a745;">(${sData.per})</span>`;
+                document.getElementById('d_absent').innerText = sData.abs;
+
+                let subDisp = "None";
+                SUB_TYPES.forEach(s => {
+                    if (CANDIDATE.SubRaw.includes(s.key) || (s.key === "LDCP" && (CANDIDATE.SubRaw.includes("BL") || CANDIDATE.SubRaw.includes("LD")))) subDisp = s.label;
+                });
+                if (subDisp === "None" && CANDIDATE.SubRaw.length > 1) subDisp = CANDIDATE.SubRaw;
+                document.getElementById('d_subcat').innerText = subDisp;
+
+                let rv = parseFloat(CANDIDATE.RawMark);
+                document.getElementById('d_rightq').innerText = !isNaN(rv) ? (rv / 1.66).toFixed(2) : "N/A";
+
+                let rawM = parseFloat(CANDIDATE.RawMark) || 0;
+                let finM = parseFloat(CANDIDATE.FinalMark) || 0;
+                let diff = finM - rawM;
+                let diffEl = document.getElementById('d_diff');
+                diffEl.innerText = (diff > 0 ? "+" : "") + diff.toFixed(4);
+                diffEl.style.color = diff >= 0 ? "#28a745" : "#dc3545";
+
+                document.getElementById('res_start').value = 1;
+                document.getElementById('res_end').value = CANDIDATE.Merit;
+
+                runSearchLogic(1, CANDIDATE.Merit);
+
+                hideLoading();
+                document.getElementById('status-msg').innerHTML = ""; // Fix: Error message ko force remove karega
+                document.querySelector('.home-action-area').style.display = 'none'; // Fix: Stats area hide karega
+                document.getElementById('result-search').style.display = 'block';
+            }, 100);
+        }
+
+        function runSearchLogic(start, end) {
+            let deepStart = start;
+            let deepEnd = CANDIDATE.Merit;
+            let isSafeMode = false;
+
+            if (start > CANDIDATE.Merit) {
+                isSafeMode = true;
+                deepStart = 1;
+                deepEnd = CANDIDATE.Merit;
+            }
+
+            document.getElementById('lbl-ov-stats').innerText = `🌐 Overall Stats (Rank ${start}-${end})`;
+            document.getElementById('lbl-sh-stats').innerText = `⚡ Shift ${CANDIDATE.Shift} Stats (Rank ${start}-${end})`;
+
+            const opacity = isSafeMode ? "0.4" : "1";
+            document.getElementById('rt-wrapper-1').style.opacity = opacity;
+            document.getElementById('rt-wrapper-3').style.opacity = opacity;
+            document.getElementById('rt-wrapper-2').style.opacity = "1";
+            document.getElementById('rt-wrapper-4').style.opacity = "1";
+
+            calculateSearchTables(start, end);
+            calculateBadges(deepStart, deepEnd);
+        }
+
+        async function updateSearchResult() {
+            let s = parseInt(document.getElementById('res_start').value) || 1;
+            let e = parseInt(document.getElementById('res_end').value) || CANDIDATE.Merit;
+            const status = document.getElementById('status-msg');
+
+            if (s > e) {
+                alert("Start > End!");
+                return;
+            }
+            if (e > 500000) {
+                alert("⚠️ Error: Maximum Rank limit is 5,00,000!");
+                return;
+            }
+
+            showLoading("Updating Range...", "Checking data availability...");
+
+            const meritFileList = (CURRENT_TYPE === "TSP") ? MERIT_FILES_TSP : MERIT_FILES_NTSP;
+
+            for (const mFile of meritFileList) {
+                if (checkMeritInMemory(e, CURRENT_TYPE)) break;
+
+                if (!LOADED_FILES.has(mFile)) {
+                    showLoading("Downloading Data...", `Fetching: ${mFile}`);
+                    await loadScript(mFile);
+                    loadDB(CURRENT_TYPE);
+                    if (checkMeritInMemory(e, CURRENT_TYPE)) break;
+                }
+            }
+
+            setTimeout(() => {
+                runSearchLogic(s, e);
+                hideLoading();
+            }, 100);
+        }
+
+        function resetSearchAnalysis() {
+            document.getElementById('res_start').value = 1;
+            document.getElementById('res_end').value = CANDIDATE.Merit;
+            runSearchLogic(1, CANDIDATE.Merit);
+            document.getElementById('cutoff-display-area').style.display = 'block';
+        }
+
+        async function executeAnalyze() {
+            const type = document.getElementById('examTypeAnalyze').value;
+            const start = parseInt(document.getElementById('ana_start').value);
+            const end = parseInt(document.getElementById('ana_end').value);
+            const status = document.getElementById('status-msg');
+
+            document.getElementById('result-search').style.display = 'none';
+            document.getElementById('result-analyze').style.display = 'none';
+            document.getElementById('cutoff-display-area').style.display = 'none';
+
+            //500,000 LIMIT
+            if (!start || !end) {
+                status.innerHTML = "Please enter Start and End Rank!";
+                status.style.color = "red";
+                return;
+            }
+
+            if (start > end) {
+                status.innerHTML = "Error: Start Rank cannot be greater than End Rank!";
+                status.style.color = "red";
+                return;
+            }
+
+            if (end > 500000) {
+                status.innerHTML = "⚠️ Error: Max analysis limit is 500,000!";
+                status.style.color = "red";
+                return;
+            }
+
+            showLoading("Preparing Analysis...", "Checking data segments...");
+
+            const meritFileList = (type === "TSP") ? MERIT_FILES_TSP : MERIT_FILES_NTSP;
+
+            for (const mFile of meritFileList) {
+                if (checkMeritInMemory(end, type)) break;
+
+                if (!LOADED_FILES.has(mFile)) {
+                    showLoading("Loading Data...", `Downloading segment: ${mFile}`);
+                    await loadScript(mFile);
+                    if (checkMeritInMemory(end, type)) break;
+                }
+            }
+
+            showLoading("Crunching Numbers...", "Generating Statistics tables...");
+
+            setTimeout(() => {
+                loadDB(type);
+                document.getElementById('ana-ov-header').innerText = `🌐 Overall Stats (Rank ${start}-${end})`;
+                calculateMultiShiftTables(start, end);
+
+                hideLoading();
+                document.getElementById('result-analyze').style.display = 'block';
+            }, 200);
+        }
+
+        function calculateBadges(start, end) {
+            let mySubKey = "";
+            SUB_TYPES.forEach(s => {
+                if (CANDIDATE.SubRaw.includes(s.key) || (s.key === "LDCP" && (CANDIDATE.SubRaw.includes("BL") || CANDIDATE.SubRaw.includes("LD")))) mySubKey = s.key;
+            });
+
+            let stats = {
+                range: {
+                    l: "Range Count",
+                    a: 0,
+                    n: 0
+                },
+                cat: {
+                    l: "Category Rank (" + CANDIDATE.Cat + ")",
+                    a: 0,
+                    n: 0
+                },
+                gen: {
+                    l: "Gender Rank (" + CANDIDATE.Gen + ")",
+                    a: 0,
+                    n: 0
+                },
+                mix: {
+                    l: "Mix (" + CANDIDATE.Cat + "+" + CANDIDATE.Gen.charAt(0) + ")",
+                    a: 0,
+                    n: 0
+                },
+                sub: {
+                    l: "Special Category",
+                    a: 0,
+                    n: 0
+                },
+                tsp: {
+                    l: "TSP Status Check",
+                    a: 0,
+                    n: 0
+                }
+            };
+            let shiftStats = JSON.parse(JSON.stringify(stats));
+
+            for (let i = start; i <= end; i++) {
+                const p = CURRENT_DB[i];
+                if (!p) continue;
+                let pCat = (p.Category || "OTHER").toUpperCase();
+                if (!CAT_ORDER.includes(pCat)) pCat = "OTHER";
+                let pGen = (p.Gender || "OTHER").toUpperCase(),
+                    pTsp = (p.TSP || "").toUpperCase().includes("YES") || (p.TSP || "").toUpperCase().includes("TSP");
+                let pSub = (p.SubCat || "").toUpperCase();
+
+                const inc = (o, t) => {
+                    o.a++;
+                    if (!t) o.n++;
+                };
+
+                inc(stats.range, pTsp);
+                if (pCat === CANDIDATE.Cat) inc(stats.cat, pTsp);
+                if (pGen === CANDIDATE.Gen) inc(stats.gen, pTsp);
+                if (pCat === CANDIDATE.Cat && pGen === CANDIDATE.Gen) inc(stats.mix, pTsp);
+                if (mySubKey && pCat === CANDIDATE.Cat && (pSub.includes(mySubKey) || (mySubKey === "LDCP" && (pSub.includes("BL") || pSub.includes("LD"))))) inc(stats.sub, pTsp);
+                if (CANDIDATE.Tsp && pTsp) stats.tsp.a++;
+
+                if (String(p.Shift) === CANDIDATE.Shift) {
+                    inc(shiftStats.range, pTsp);
+                    if (pCat === CANDIDATE.Cat) inc(shiftStats.cat, pTsp);
+                    if (pGen === CANDIDATE.Gen) inc(shiftStats.gen, pTsp);
+                    if (pCat === CANDIDATE.Cat && pGen === CANDIDATE.Gen) inc(shiftStats.mix, pTsp);
+                    if (mySubKey && pCat === CANDIDATE.Cat && (pSub.includes(mySubKey) || (mySubKey === "LDCP" && (pSub.includes("BL") || pSub.includes("LD"))))) inc(shiftStats.sub, pTsp);
+                    if (CANDIDATE.Tsp && pTsp) shiftStats.tsp.a++;
+                }
+            }
+            renderRankTable("tb-overall-rank", stats, mySubKey, CANDIDATE.Tsp);
+            renderRankTable("tb-shift-rank", shiftStats, mySubKey, CANDIDATE.Tsp);
+        }
+
+        const z = () => ({
+            m: 0,
+            f: 0,
+            o: 0,
+            tot: 0,
+            tsp: 0
+        });
+
+        const createEmptyMatrix = () => {
+            let m = {};
+            [...CAT_ORDER, "OTHER"].forEach(c => {
+                let subObj = {};
+                SUB_TYPES.forEach(sub => {
+                    subObj[sub.key] = z();
+                });
+                m[c] = {
+                    ...z(),
+                    pure: z(),
+                    subs: subObj
+                };
+            });
+            return m;
+        };
+
+        function processRow(m, p) {
+            let cat = (p.Category || "OTHER").toUpperCase();
+            if (!CAT_ORDER.includes(cat)) cat = "OTHER";
+            let gen = (p.Gender || "OTHER").trim().toUpperCase();
+            let tsp = (p.TSP || "").toUpperCase().includes("YES") || (p.TSP || "").toUpperCase().includes("TSP");
+            let sub = (p.SubCat || "").trim().toUpperCase();
+
+            let r = m[cat];
+            let gKey = 'o';
+            if (gen === 'MALE') gKey = 'm';
+            else if (gen === 'FEMALE') gKey = 'f';
+
+            if (CURRENT_TYPE === 'NTSP') {
+                if (tsp) {
+                    r.tsp++;
+                    r.tot++;
+                } else {
+                    r[gKey]++;
+                    r.tot++;
+                }
+            } else {
+                r[gKey]++;
+                r.tot++;
+            }
+
+            let isSpecial = false;
+            SUB_TYPES.forEach(s => {
+                if (sub === s.key) {
+                    isSpecial = true;
+                    let sr = r.subs[s.key];
+                    if (CURRENT_TYPE === 'NTSP') {
+                        if (tsp) {
+                            sr.tsp++;
+                            sr.tot++;
+                        } else {
+                            sr[gKey]++;
+                            sr.tot++;
+                        }
+                    } else {
+                        sr[gKey]++;
+                        sr.tot++;
+                    }
+                }
+            });
+
+            if (!r.pure) r.pure = {
+                m: 0,
+                f: 0,
+                o: 0,
+                tsp: 0,
+                tot: 0
+            };
+            if (!isSpecial) {
+                if (CURRENT_TYPE === 'NTSP') {
+                    if (tsp) {
+                        r.pure.tsp++;
+                        r.pure.tot++;
+                    } else {
+                        r.pure[gKey]++;
+                        r.pure.tot++;
+                    }
+                } else {
+                    r.pure[gKey]++;
+                    r.pure.tot++;
+                }
+            }
+        }
+
+        function getTableHeader(isShift = false) {
+            let bg = isShift ? "background:#f3e5f5;color:#4a148c;" : "";
+
+            if (CURRENT_TYPE === 'NTSP') {
+                return `<thead>
+                    <tr>
+                        <th class="col-cat" rowspan="2" style="${bg}">Category</th>
+                        <th colspan="3" class="ntsp-header">NTSP</th>
+                        <th rowspan="2" class="tsp-super-header">TSP</th>
+                        <th rowspan="2" style="${bg}">Total</th>
+                    </tr>
+                    <tr>
+                        <th style="${bg}">Male</th>
+                        <th style="${bg}">Female</th>
+                        <th style="${bg}">THIRD</th> </tr>
+                </thead>`;
+            } else {
+                return `<thead><tr><th class="col-cat" style="${bg}">Category</th><th style="${bg}">Male</th><th style="${bg}">Female</th><th style="${bg}">THIRD</th><th style="${bg}">Total</th></tr></thead>`;
+            }
+        }
+
+        function calculateSearchTables(start, end) {
+            let gm = createEmptyMatrix(),
+                sm = createEmptyMatrix();
+            for (let i = start; i <= end; i++) {
+                const p = CURRENT_DB[i];
+                if (!p) continue;
+                processRow(gm, p);
+                if (String(p.Shift) === CANDIDATE.Shift) processRow(sm, p);
+            }
+            document.getElementById("tb-overall-stats").innerHTML = getTableHeader() + `<tbody id="b1"></tbody>`;
+            renderDeepTable(document.getElementById("b1"), gm);
+            document.getElementById("tb-shift-stats").innerHTML = getTableHeader(true) + `<tbody id="b2"></tbody>`;
+            renderDeepTable(document.getElementById("b2"), sm);
+        }
+
+        function calculateMultiShiftTables(start, end) {
+            let gm = createEmptyMatrix();
+            let shifts = {};
+
+            for (let i = start; i <= end; i++) {
+                const p = CURRENT_DB[i];
+                if (!p) continue;
+                processRow(gm, p);
+                let s = String(p.Shift);
+                if (!shifts[s]) shifts[s] = createEmptyMatrix();
+                processRow(shifts[s], p);
+            }
+
+            const ovCont = document.getElementById('ana-overall-container');
+            ovCont.innerHTML = `<div class="table-wrapper"><table class="stats-table">${getTableHeader()}<tbody></tbody></table></div>`;
+            renderDeepTable(ovCont.querySelector('tbody'), gm);
+
+            const shCont = document.getElementById('ana-shifts-container');
+            shCont.innerHTML = "";
+            Object.keys(shifts).sort().forEach(sk => {
+                let div = document.createElement('div');
+                div.className = "dynamic-shift-wrapper";
+                div.innerHTML = `<div class="dynamic-shift-label">Shift ${sk}</div><div class="table-wrapper"><table class="stats-table">${getTableHeader()}<tbody></tbody></table></div>`;
+                shCont.appendChild(div);
+                renderDeepTable(div.querySelector('tbody'), shifts[sk]);
+            });
+        }
+
+        function renderRankTable(id, d, hasSub, hasTsp) {
+            const tbody = document.getElementById(id);
+            tbody.innerHTML = "";
+            const isTspCand = CANDIDATE.Tsp;
+            const table = tbody.closest('table');
+            if (table) {
+                const th3 = table.querySelector('th:nth-child(3)');
+                if (th3) {
+                    if (isTspCand) {
+                        th3.innerText = "Rank (TSP Only)";
+                        th3.style.background = "#fd7e14";
+                    } else {
+                        th3.innerText = "Rank (NTSP Only)";
+                        th3.style.background = "";
+                    }
+                }
+            }
+
+            const k = ["range", "gen", "cat", "mix"];
+            if (hasSub) k.push("sub");
+
+            k.forEach(key => {
+                let v = d[key];
+                let col2Val = 0;
+                if (isTspCand) {
+                    col2Val = v.a - v.n;
+                } else {
+                    col2Val = v.n;
+                }
+
+                tbody.innerHTML += `<tr>
+                    <td>${v.l}</td>
+                    <td class="st-val">${v.a}</td>
+                    <td class="st-val" style="font-weight:800; color:${isTspCand ? '#d35400' : '#0056b3'}">
+                        ${col2Val}
+                    </td>
+                </tr>`;
+            });
+        }
+
+        function renderDeepTable(tbody, data) {
+            let gt = z();
+            gt.all = 0;
+
+            [...CAT_ORDER, "OTHER"].forEach(c => {
+                let d = data[c];
+                if (d.tot === 0) return;
+
+                gt.m += d.m;
+                gt.f += d.f;
+                gt.o += d.o;
+                gt.tsp += d.tsp;
+                gt.all += d.tot;
+
+                let subSum = {
+                    m: 0,
+                    f: 0,
+                    o: 0,
+                    tsp: 0,
+                    tot: 0
+                };
+                let hasSubs = false;
+
+                SUB_TYPES.forEach(s => {
+                    let sd = d.subs[s.key];
+                    if (sd.tot > 0) {
+                        hasSubs = true;
+                        subSum.m += sd.m;
+                        subSum.f += sd.f;
+                        subSum.o += sd.o;
+                        subSum.tsp += sd.tsp;
+                        subSum.tot += sd.tot;
+                    }
+                });
+
+                let openM = d.m - subSum.m;
+                let openF = d.f - subSum.f;
+                let openO = d.o - subSum.o;
+                let openTsp = d.tsp - subSum.tsp;
+                let openTot = d.tot - subSum.tot;
+
+                let label = hasSubs ? `${c} (Open)` : c;
+                let tspCellOpen = CURRENT_TYPE === 'NTSP' ? `<td class="tsp-cell">${openTsp}</td>` : '';
+
+                let h = `<tr>
+                    <td class="col-cat"><span class="cat-tag bg-${c}">${label}</span></td>
+                    <td>${openM}</td><td>${openF}</td><td>${openO}</td>
+                    ${tspCellOpen}<td style="font-weight:bold;">${openTot}</td>
+                </tr>`;
+
+                SUB_TYPES.forEach(s => {
+                    let sd = d.subs[s.key];
+                    if (sd.tot > 0) {
+                        let tspCellSub = CURRENT_TYPE === 'NTSP' ? `<td class="tsp-cell">${sd.tsp}</td>` : '';
+                        h += `<tr class="sub-row">
+                            <td class="col-cat sub-label">↳ ${s.label}</td>
+                            <td>${sd.m}</td><td>${sd.f}</td><td>${sd.o}</td>
+                            ${tspCellSub}<td>${sd.tot}</td>
+                        </tr>`;
+                    }
+                });
+
+                if (hasSubs) {
+                    let tspCellTot = CURRENT_TYPE === 'NTSP' ? `<td class="tsp-cell" style="font-weight:bold;">${d.tsp}</td>` : '';
+                    h += `<tr style="background:#fff3cd; border-bottom:2px solid #ddd;">
+                        <td class="col-cat" style="font-weight:bold; color:#856404; text-align:right!important; padding-right:10px!important;">Total ${c} ➤</td>
+                        <td style="font-weight:bold;">${d.m}</td>
+                        <td style="font-weight:bold;">${d.f}</td>
+                        <td style="font-weight:bold;">${d.o}</td>
+                        ${tspCellTot}
+                        <td style="font-weight:bold; color:#000;">${d.tot}</td>
+                    </tr>`;
+                }
+
+                tbody.innerHTML += h;
+            });
+
+            if (gt.all > 0) {
+                let tspCellTot = CURRENT_TYPE === 'NTSP' ? `<td class="tsp-cell">${gt.tsp}</td>` : '';
+                tbody.innerHTML += `<tr class="grand-total-row">
+                    <td class="col-cat">GRAND TOTAL</td>
+                    <td>${gt.m}</td><td>${gt.f}</td><td>${gt.o}</td>
+                    ${tspCellTot}<td>${gt.all}</td>
+                </tr>`;
+            }
+        }
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault(); // Right Click Band
+        });
+
+        document.onkeydown = function(e) {
+            if (
+                event.keyCode === 123 ||
+                (e.ctrlKey && e.shiftKey && e.keyCode === 73) ||
+                (e.ctrlKey && e.shiftKey && e.keyCode === 74) ||
+                (e.ctrlKey && e.keyCode === 85)
+            ) {
+                return false;
+            }
+        };
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('service-worker.js');
+    </script>
+</body>
+
+</html>
