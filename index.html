@@ -337,7 +337,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     observer.unobserve(entry.target);
-                    animateValue("count-ntsp-merit", 0, (MERIT_FILES_NTSP.length * 100000), 2000);
+                    animateValue("count-ntsp-merit", 0, (MERIT_FILES_NTSP.length * 200000), 2000);
                     animateValue("count-ntsp-roll", 0, (ROLL_FILES_NTSP.length * 100000), 2000);
                     animateValue("count-tsp-merit", 0, (MERIT_FILES_TSP.length * 100000), 2000);
                     animateValue("count-tsp-roll", 0, (ROLL_FILES_TSP.length * 100000), 2000);
@@ -695,8 +695,8 @@
                 alert("Start > End!");
                 return;
             }
-            if (e > 500000) {
-                alert("⚠️ Error: Maximum Rank limit is 5,00,000!");
+            if (e > 1000000) {
+                alert("⚠️ Error: Maximum Rank limit is 10,00,000!");
                 return;
             }
 
@@ -751,8 +751,8 @@
                 return;
             }
 
-            if (end > 500000) {
-                status.innerHTML = "⚠️ Error: Max analysis limit is 500,000!";
+            if (end > 1000000) {
+                status.innerHTML = "⚠️ Error: Max analysis limit is 1000,000!";
                 status.style.color = "red";
                 return;
             }
