@@ -4,7 +4,7 @@ const CUTOFF_DB = {
     "NTSP": {
         "GEN": {
             "GEN": { cut: "146.3279" },
-            "FEM": { cut: "135.65061" },
+            "FEM": { cut: "135.6506" },
             "WID": { cut: "32.6964" },
             "DIV": { cut: "86.0888" },
             "EX":  { cut: "0.0033" }
