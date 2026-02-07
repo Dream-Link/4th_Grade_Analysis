@@ -3,75 +3,75 @@
 const CUTOFF_DB = {
     "NTSP": {
         "GEN": {
-            "GEN": { cut: "146.3279" },
-            "FEM": { cut: "135.6506" },
-            "WID": { cut: "32.6964" },
+            "GEN": { cut: "144.2955" },
+            "FEM": { cut: "134.9021" },
+            "WID": { cut: "30.6569" },
             "DIV": { cut: "86.0888" },
-            "EX":  { cut: "0.0033" }
+            "EX":  { cut: "0.0035" }
         },
         "OBC": {
-            "GEN": { cut: "138.2739" },
-            "FEM": { cut: "128.3747" },
-            "WID": { cut: "0.0033" },
-            "DIV": { cut: "62.9038" },
+            "GEN": { cut: "136.1224" },
+            "FEM": { cut: "126.1377" },
+            "WID": { cut: "0.0035" },
+            "DIV": { cut: "61.4786" },
             "EX":  { cut: "NA" }
         },
         "EWS": {
-            "GEN": { cut: "131.6337" },
-            "FEM": { cut: "122.0484" },
-            "WID": { cut: "0.2585" },
-            "DIV": { cut: "47.0655" },
+            "GEN": { cut: "129.1103" },
+            "FEM": { cut: "119.7978" },
+            "WID": { cut: "0.017" },
+            "DIV": { cut: "16.7286" },
             "EX":  { cut: "NA" }
         },
         "MBC": {
-            "GEN": { cut: "132.7357" },
-            "FEM": { cut: "116.6476" },
+            "GEN": { cut: "130.2844" },
+            "FEM": { cut: "115.2445" },
             "WID": { cut: "0.0033" },
-            "DIV": { cut: "57.8038" },
+            "DIV": { cut: "56.5488" },
             "EX":  { cut: "NA" }
         },
         "SC": {
-            "GEN": { cut: "126.0259" },
-            "FEM": { cut: "114.4693" },
-            "WID": { cut: "0.0033" },
-            "DIV": { cut: "51.5655" },
+            "GEN": { cut: "123.8287" },
+            "FEM": { cut: "112.248" },
+            "WID": { cut: "0.0035" },
+            "DIV": { cut: "50.5545" },
             "EX":  { cut: "NA" }
         },
         "ST": {
-            "GEN": { cut: "117.0626" },
-            "FEM": { cut: "110.8956" },
-            "WID": { cut: "0.0033" },
-            "DIV": { cut: "38.7189" },
+            "GEN": { cut: "114.6136" },
+            "FEM": { cut: "108.8068" },
+            "WID": { cut: "0.0035" },
+            "DIV": { cut: "38.2753" },
             "EX":  { cut: "NA" }
         },
         "SAH": {
-            "GEN": { cut: "0.0143" },
-            "FEM": { cut: "0.0033" },
-            "WID": { cut: "0.0033" },
-            "DIV": { cut: "0.0033" },
+            "GEN": { cut: "0.0307" },
+            "FEM": { cut: "0.0035" },
+            "WID": { cut: "3.8805" },
+            "DIV": { cut: "16.0842" },
             "EX":  { cut: "-" }
         }
     },
     "TSP": {
         "GEN": {
-            "GEN": { cut: "116.4909" },
-            "FEM": { cut: "105.4976" },
-            "WID": { cut: "4.6143" },
-            "DIV": { cut: "53.1944" },
-            "EX":  { cut: "3.0184" }
+            "GEN": { cut: "114.5787" },
+            "FEM": { cut: "103.5956" },
+            "WID": { cut: "2.2664" },
+            "DIV": { cut: "53.2237" },
+            "EX":  { cut: "3.0985" }
         },
         "SC": {
-            "GEN": { cut: "105.412" },
-            "FEM": { cut: "97.3662" },
-            "WID": { cut: "0.2731" },
-            "DIV": { cut: "45.1998" },
+            "GEN": { cut: "103.0029" },
+            "FEM": { cut: "96.6704" },
+            "WID": { cut: "0.3591" },
+            "DIV": { cut: "45.3045" },
             "EX":  { cut: "NA" }
         },
         "ST": {
-            "GEN": { cut: "95.2353" },
-            "FEM": { cut: "92.1806" },
-            "WID": { cut: "0.0033" },
-            "DIV": { cut: "9.4442" },
+            "GEN": { cut: "94.3851" },
+            "FEM": { cut: "91.6757" },
+            "WID": { cut: "0.0035" },
+            "DIV": { cut: "9.1706" },
             "EX":  { cut: "NA" }
         }
     }
@@ -79,18 +79,18 @@ const CUTOFF_DB = {
 
 const HORIZONTAL_CUTOFF = {
     "NTSP": [
-        { label: "LD/CP",  cut: "73.1223" },
-        { label: "SPORTS", cut: "0.0033" },
-        { label: "BL/LV",  cut: "0.0033" }, 
-        { label: "HI",     cut: "0.0033" }, 
-        { label: "MD/MI",  cut: "0.0033" } 
+        { label: "LD/CP",  cut: "70.833" },
+        { label: "SPORTS", cut: "0.0035" },
+        { label: "BL/LV",  cut: "0.0035" }, 
+        { label: "HI",     cut: "0.0035" }, 
+        { label: "MD/MI",  cut: "0.0035" } 
     ],
     "TSP": [
-        { label: "LD/CP",  cut: "33.6563" },
-        { label: "SPORTS", cut: "0.0033" },
+        { label: "LD/CP",  cut: "3.1949" },
+        { label: "SPORTS", cut: "0.033" },
         { label: "B/LV",  cut: "0.0033" },
-        { label: "HI",     cut: "0.3242" },
-        { label: "MD/MI",  cut: "0.3242" }
+        { label: "HI",     cut: "0.4139" },
+        { label: "MD/MI",  cut: "0.4139" }
     ]
 };
 
